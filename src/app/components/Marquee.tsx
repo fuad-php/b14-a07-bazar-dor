@@ -1,6 +1,10 @@
+
 import MarqueeText from "react-marquee-text";
 import "react-marquee-text/dist/styles.css";
-import { TbTriangleFilled, TbTriangleInvertedFilled } from "react-icons/tb";
+import {
+  TbTriangleFilled,
+  TbTriangleInvertedFilled,
+} from "react-icons/tb";
 
 interface Product {
   id: number | string;
@@ -16,41 +20,79 @@ interface Product {
 }
 
 const Marquee = async () => {
-  const res = await fetch(process.env.PRODUCT_API_LINK + "/bazardor/products");
+  const apiUrl = process.env.PRODUCT_API_LINK;
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch products");
+  if (!apiUrl) {
+    console.error("PRODUCT_API_LINK is not configured.");
+    return null;
   }
 
-  const products: Product[] = await res.json();
+  let products: Product[] = [];
+
+  try {
+    const res = await fetch(`${apiUrl}/bazardor/products`, {
+      next: { revalidate: 300 },
+    });
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch products: ${res.status}`);
+    }
+
+    products = await res.json();
+  } catch (error) {
+    console.error("Marquee product fetch error:", error);
+    return null;
+  }
+
+  if (products.length === 0) {
+    return null;
+  }
 
   return (
-    <MarqueeText direction="right" duration={20} className="py-1 bg-base-200 border-base-300">
-      {products.map((product) => (
-        <div key={product.id} className="flex items-center gap-2 px-4 py-1" >
-            <span>  
-                {product.image }
-            </span>
-            <span className="text-base text-gray-800">
-                {product.nameBn}
-            </span>
+    <div className="border-b border-base-300 bg-base-200 text-base-content">
+      <div className="flex items-center">        
+        <div className="min-w-0 flex-1 overflow-hidden">
+          <MarqueeText
+            direction="right"
+            duration={25}
+            className="py-1"
+          >
+            {products.map((product) => {
+              const isUp = product.change.dir === "up";
 
-            <span className="font-semibold text-gray-700">
-                {product.today} টাকা/{product.unit}
-            </span>
+              return (
+                <div
+                  key={product.id}
+                  className="flex items-center gap-2 whitespace-nowrap border-r border-base-300 px-4 py-2 text-sm"
+                >
+                  <span className="font-semibold">
+                    {product.nameBn}
+                  </span>
 
-            <span className={`flex items-center gap-1 font-semibold ${ product.change.dir === "up" ? "text-red-600" : "text-green-600"}`}>
-                {product.change.dir === "up" ? (
-                <TbTriangleFilled />
-                ) : (
-                <TbTriangleInvertedFilled />
-                )}
+                  <span className="font-bold text-base-content">
+                    {product.today} টাকা/{product.unit}
+                  </span>
 
-                {Math.abs(product.change.pct)}%
-            </span>
+                  <span
+                    className={`inline-flex items-center gap-1 font-semibold ${
+                      isUp ? "text-error" : "text-success"
+                    }`}
+                    aria-label={`দাম ${isUp ? "বেড়েছে" : "কমেছে"} ${Math.abs(product.change.pct)} শতাংশ`}
+                  >
+                    {isUp ? (
+                      <TbTriangleFilled aria-hidden="true" />
+                    ) : (
+                      <TbTriangleInvertedFilled aria-hidden="true" />
+                    )}
+                    {Math.abs(product.change.pct)}%
+                  </span>
+                </div>
+              );
+            })}
+          </MarqueeText>
         </div>
-      ))}
-    </MarqueeText>
+      </div>
+    </div>
   );
 };
 

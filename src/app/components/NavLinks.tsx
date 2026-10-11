@@ -1,3 +1,4 @@
+
 import Link from "next/link";
 
 interface Category {
@@ -35,25 +36,30 @@ const NavLinks = async () => {
   }
 
   return (
-    <nav
-      aria-label="Product categories"
-      className="w-full overflow-x-auto"
-    >
-      <div className="flex w-max min-w-full items-center gap-2">
-        {categories.map((category) => (
-          <Link
-            key={category.id}
-            href={`/category/${category.slug}`}
-            className="shrink-0 rounded-lg px-3 py-2 text-sm font-bold text-base-content/80 transition-colors hover:bg-base-200 hover:text-primary focus-visible:outline-2 focus-visible:outline-primary"
-          >
-            <span className="mr-1" aria-hidden="true">
-              {category.icon}
-            </span>
-            {category.nameBn}
-          </Link>
-        ))}
-      </div>
-    </nav>
+    <div className="w-full">
+      <nav
+        aria-label="পণ্যের ক্যাটাগরি"
+        className="scrollbar-hide overflow-x-auto overscroll-x-contain"
+      >
+        <div className="flex w-max min-w-full items-center gap-1 py-2">
+          {categories.map((category) => (
+            <Link
+              key={category.id}
+              href={`/category/${category.slug}`}
+              className="inline-flex shrink-0 items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-semibold text-base-content/75 transition-colors duration-200 hover:bg-primary/10 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              <span aria-hidden="true" className="text-base">
+                {category.icon}
+              </span>
+
+              <span className="whitespace-nowrap">
+                {category.nameBn}
+              </span>
+            </Link>
+          ))}
+        </div>
+      </nav>
+    </div>
   );
 };
 

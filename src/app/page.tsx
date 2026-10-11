@@ -1,10 +1,19 @@
+
 import Hero from "./components/Hero";
-import { IProductType } from "./types/ProductType";
-import { TbTriangleFilled, TbTriangleInvertedFilled } from "react-icons/tb";
 import ProductCard from "./components/ProductCard";
+import { IProductType } from "./types/ProductType";
+import {
+  TbTriangleFilled,
+  TbTriangleInvertedFilled,
+} from "react-icons/tb";
 
 export default async function Home() {
-  const res = await fetch(`${process.env.PRODUCT_API_LINK}/bazardor/products`);
+  const res = await fetch(
+    `${process.env.PRODUCT_API_LINK}/bazardor/products`,
+    {
+      next: { revalidate: 300 },
+    }
+  );
 
   if (!res.ok) {
     throw new Error("Failed to fetch products");
@@ -21,72 +30,83 @@ export default async function Home() {
   );
 
   return (
-    <main className="mx-auto flex max-w-7xl flex-col gap-8 px-4 py-8">
-      <section className="flex justify-center py-2">
+    <div className="page-container flex flex-col gap-10 py-6 sm:py-8">
+      {/* Hero */}
+      <section aria-label="বাজার দর পরিচিতি">
         <Hero />
       </section>
 
       {/* Price Increased Products */}
-      <section className="flex flex-col gap-4">
-        <div className="flex items-center gap-2">
-          <TbTriangleFilled className="inline-block text-2xl text-error" />
-          <h2 className="text-2xl font-bold">
-           আজ দাম বেড়েছে
-          </h2>          
+      <section className="flex flex-col gap-5">
+        <div className="flex items-center gap-3">
+          <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-error/10">
+            <TbTriangleFilled className="text-xl text-error" />
+          </div>
+
+          <div>
+            <h2 className="section-title">আজ দাম বেড়েছে</h2>           
+          </div>
         </div>
 
         {priceIncreasedProducts.length > 0 ? (
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 bg-base-100 p-4 rounded-lg">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {priceIncreasedProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
         ) : (
-          <p className="rounded-lg bg-base-200 p-6 text-center">
-            No products with price increases found.
+          <p className="surface-card p-6 text-center muted-text">
+            বর্তমানে দাম বেড়েছে এমন কোনো পণ্য পাওয়া যায়নি।
           </p>
         )}
       </section>
 
       {/* Price Decreased Products */}
-      <section className="flex flex-col gap-4">
-        <div>
-          <h2 className="text-2xl font-bold">
-            <TbTriangleInvertedFilled className="inline-block text-2xl text-success" /> আজ দাম কমেছে
-          </h2>          
+      <section className="flex flex-col gap-5">
+        <div className="flex items-center gap-3">
+          <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-success/10">
+            <TbTriangleInvertedFilled className="text-xl text-success" />
+          </div>
+
+          <div>
+            <h2 className="section-title">আজ দাম কমেছে</h2>            
+          </div>
         </div>
 
         {priceDecreasedProducts.length > 0 ? (
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {priceDecreasedProducts.map((product) => (
-             <ProductCard key={product.id} product={product} />
+              <ProductCard key={product.id} product={product} />
             ))}
           </div>
         ) : (
-          <p className="rounded-lg bg-base-200 p-6 text-center">
-            No products with price decreases found.
+          <p className="surface-card p-6 text-center muted-text">
+            বর্তমানে দাম কমেছে এমন কোনো পণ্য পাওয়া যায়নি।
           </p>
         )}
       </section>
-      <section className="flex flex-col gap-4">
+
+      {/* All Products */}
+      <section className="flex flex-col gap-5">
         <div>
-          <h2 className="text-2xl font-bold">
-            সব পণ্য
-          </h2>          
+          <h2 className="section-title">সব পণ্য</h2>
+          <p className="mt-1 text-sm muted-text">
+            নিত্যপ্রয়োজনীয় সব পণ্যের বাজারদর এক নজরে দেখুন।
+          </p>
         </div>
 
         {products.length > 0 ? (
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {products.map((product) => (
-             <ProductCard key={product.id} product={product} />
+              <ProductCard key={product.id} product={product} />
             ))}
           </div>
         ) : (
-          <p className="rounded-lg bg-base-200 p-6 text-center">
-            No products found.
+          <p className="surface-card p-6 text-center muted-text">
+            কোনো পণ্য পাওয়া যায়নি।
           </p>
         )}
       </section>
-    </main>
+    </div>
   );
-} 
+}
