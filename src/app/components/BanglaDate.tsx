@@ -11,7 +11,7 @@ const BanglaDate = () => {
   );
 
   return (
-    <span className="text-xs text-base-content/60 sm:text-sm py-2">
+    <span className="text-xs font-semibold sm:text-sm p-2">
       {date}
     </span>
   );

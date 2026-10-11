@@ -87,7 +87,7 @@ export default async function Home() {
       </section>
 
       {/* All Products */}
-      <section className="flex flex-col gap-5">
+      <section className="flex flex-col gap-5" id="all-products">
         <div>
           <h2 className="section-title">সব পণ্য</h2>
           <p className="mt-1 text-sm muted-text">

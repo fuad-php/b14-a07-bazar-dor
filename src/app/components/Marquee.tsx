@@ -49,7 +49,7 @@ const Marquee = async () => {
   }
 
   return (
-    <div className="border-b border-base-300 bg-base-200 text-base-content">
+    <div className="border-b border-t border-base-100 bg-base-300 text-base-content">
       <div className="flex items-center">        
         <div className="min-w-0 flex-1 overflow-hidden">
           <MarqueeText

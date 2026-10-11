@@ -6,7 +6,7 @@ import BanglaDate from "./BanglaDate";
 
 const Navbar = () => {
   return (
-    <header className="sticky top-0 z-50 border-b border-base-300 bg-base-100">
+    <header className="sticky top-0 z-50 border-b border-base-300 bg-base-200">
       {/* Main Navbar */}
       <div className="max-w-7xl mx-auto px-2">
         <div className="flex min-h-20 items-center justify-between gap-3 py-3 sm:gap-6">
@@ -55,10 +55,7 @@ const Navbar = () => {
       </div>
 
       {/* Category Navigation */}
-      <nav
-        aria-label="পণ্যের ক্যাটাগরি"
-        className="border-t border-base-300 bg-base-100"
-      >
+      <nav aria-label="পণ্যের ক্যাটাগরি" className="border-t border-base-300 bg-base-200" >
         <div className="page-container">
           <div className="overflow-x-auto">
             <NavLinks />
