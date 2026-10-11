@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const Hero = () => {
     return (
-        <div className="flex flex-col justify-center bg-base-300 rounded-lg shadow-lg p-8 md:p-12 lg:p-16 my-8 mx-4 md:mx-8 lg:mx-16">
+        <div className="flex w-full flex-col justify-center bg-base-300 rounded-lg shadow-lg p-8 md:p-12 lg:p-16 my-8 mx-4 md:mx-8 lg:mx-16">
             <div className="badge badge-info bg-base-200 mb-4 p-2">
                 <BanglaDate/>
             </div>

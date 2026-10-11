@@ -1,9 +1,6 @@
 import MarqueeText from "react-marquee-text";
 import "react-marquee-text/dist/styles.css";
-import {
-  FaChevronCircleUp,
-  FaChevronCircleDown,
-} from "react-icons/fa";
+import { TbTriangleFilled, TbTriangleInvertedFilled } from "react-icons/tb";
 
 interface Product {
   id: number | string;
@@ -44,12 +41,12 @@ const Marquee = async () => {
 
             <span className={`flex items-center gap-1 font-semibold ${ product.change.dir === "up" ? "text-red-600" : "text-green-600"}`}>
                 {product.change.dir === "up" ? (
-                <FaChevronCircleUp />
+                <TbTriangleFilled />
                 ) : (
-                <FaChevronCircleDown />
+                <TbTriangleInvertedFilled />
                 )}
 
-                {product.change.pct}%
+                {Math.abs(product.change.pct)}%
             </span>
         </div>
       ))}

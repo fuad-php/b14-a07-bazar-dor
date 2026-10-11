@@ -4,6 +4,7 @@ import "./globals.css";
 
 import Navbar from "./components/Navbar";
 import Marquee from "./components/Marquee";
+import Footer from "./components/Footer";
 
 const hindSiliguri = Hind_Siliguri({
   weight: ["300", "400", "500", "600", "700"],
@@ -31,11 +32,13 @@ export default function RootLayout({
       className={`${hindSiliguri.variable} h-full antialiased`}
       data-theme="light"
     >
-      <body className="flex min-h-full flex-col bg-base-200 text-base-content">
+      <body className="flex min-h-screen flex-col bg-base-200 text-base-content">
         <Navbar />
         <Marquee />
 
         <main className="flex-1">{children}</main>
+
+        <Footer />
       </body>
     </html>
   );

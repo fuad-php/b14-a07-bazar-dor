@@ -51,7 +51,7 @@ const ProductCard = ({ product } : IProductProps) => {
                     </div>
 
                     <div className={`text-right badge bg-base-100 badge-transparent shrink-0 font-bold ${product.change.dir === "up" ? "text-error" : "text-success"}`}>
-                        {product.change.dir === "up" ? <TbTriangleFilled /> : <TbTriangleInvertedFilled />} {product.change.pct}%
+                        {product.change.dir === "up" ? <TbTriangleFilled /> : <TbTriangleInvertedFilled />} {Math.abs(product.change.pct)}%
                     </div>
                     </div>
                 </div>
