@@ -31,7 +31,7 @@ export default function RootLayout({
       className={`${hindSiliguri.variable} h-full antialiased`}
       data-theme="light"
     >
-      <body className="flex min-h-full flex-col bg-base-100 text-base-content">
+      <body className="flex min-h-full flex-col bg-base-200 text-base-content">
         <Navbar />
         <Marquee />
 

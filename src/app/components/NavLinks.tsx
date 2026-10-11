@@ -44,7 +44,7 @@ const NavLinks = async () => {
           <Link
             key={category.id}
             href={`/category/${category.slug}`}
-            className="shrink-0 rounded-lg px-3 py-2 text-sm font-medium text-base-content/80 transition-colors hover:bg-base-200 hover:text-primary focus-visible:outline-2 focus-visible:outline-primary"
+            className="shrink-0 rounded-lg px-3 py-2 text-sm font-bold text-base-content/80 transition-colors hover:bg-base-200 hover:text-primary focus-visible:outline-2 focus-visible:outline-primary"
           >
             <span className="mr-1" aria-hidden="true">
               {category.icon}
