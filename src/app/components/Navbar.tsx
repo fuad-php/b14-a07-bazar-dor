@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import NavLinks from "./NavLinks";
 import BanglaDate from "./BanglaDate";
+import UserInfo from "./UserInfo";
 
 const Navbar = () => {
   return (
@@ -37,20 +38,7 @@ const Navbar = () => {
           </Link>
 
           {/* Authentication Buttons */}
-          <div className="flex shrink-0 items-center gap-2">
-            <Link href="/login" >
-              <button className="btn btn-sm border-base-300 bg-base-100 text-base-content hover:border-primary hover:bg-primary/5 sm:btn-md">
-                সাইন ইন
-              </button>
-            </Link>
-
-            <Link
-              href="/register" >
-              <button className="btn border-base-300 btn-sm btn-primary sm:btn-md brand-button">
-              রেজিস্টার
-              </button>
-            </Link>
-          </div>
+          <UserInfo/>
         </div>
       </div>
 
