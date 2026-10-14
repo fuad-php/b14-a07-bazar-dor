@@ -7,6 +7,7 @@ import type { SubmitEvent } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { authClient } from "@/lib/auth-client";
+import { toast } from "react-toastify";
 
 const SignInPage = () => {
     const [errorMessage, setErrorMessage] = useState("");
@@ -30,16 +31,19 @@ const SignInPage = () => {
                 callbackURL: "/",
             });
 
-            if (error) {
-                setErrorMessage(
-                    error.message || "ইমেইল অথবা পাসওয়ার্ড সঠিক নয়।"
-                );
+            if (error) {                
+                toast.error(error.message)
             }
-        } catch {
-            setErrorMessage(
-                "সাইন ইন করা যায়নি। আবার চেষ্টা করুন।"
-            );
-        } finally {
+            else{
+                toast.success("সাইন ইন সফল হয়েছে।")
+            }
+        } 
+        catch 
+        {           
+            toast.error("সাইন ইন করা যায়নি। আবার চেষ্টা করুন।")
+        } 
+        finally 
+        {
             setIsLoading(false);
         }
     };
@@ -125,10 +129,7 @@ const SignInPage = () => {
 
                         <p className="text-center mt-4">
                             অ্যাকাউন্ট নেই?{" "}
-                            <Link
-                                href="/signup"
-                                className="text-green-600 hover:underline"
-                            >
+                            <Link href="/signup" className="!text-green-600 hover:underline" >
                                 সাইন আপ করুন
                             </Link>
                         </p>

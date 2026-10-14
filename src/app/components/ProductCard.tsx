@@ -1,4 +1,4 @@
-
+import bn from "number-to-bangla";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -6,6 +6,7 @@ import {
   TbTriangleInvertedFilled,
 } from "react-icons/tb";
 import { IProductType } from "../types/ProductType";
+import { translateUnit } from "./UnitConverter";
 
 interface IProductProps {
   product: IProductType;
@@ -51,7 +52,7 @@ const ProductCard = ({ product }: IProductProps) => {
               </h3>
 
               <span className="mt-2 inline-flex rounded-full bg-base-200 px-3 py-1 text-xs font-medium text-base-content/70">
-                প্রতি {product.unit}
+                প্রতি {translateUnit(product.unit)}
               </span>
             </div>
           </div>          
@@ -64,9 +65,9 @@ const ProductCard = ({ product }: IProductProps) => {
               </p>
 
               <p className="text-2xl font-bold leading-tight text-base-content sm:text-3xl">
-                ৳{product.today}
+                ৳{bn.engToNumber(product.today)}
                 <span className="ml-1 text-sm font-normal text-base-content/60">
-                  /{product.unit}
+                  /{translateUnit(product.unit)}
                 </span>
               </p>
             </div>

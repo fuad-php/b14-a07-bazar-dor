@@ -5,12 +5,14 @@ import Link from 'next/link';
 import { FaUser } from 'react-icons/fa';
 import { MdOutlineSubdirectoryArrowLeft } from 'react-icons/md';
 import { RxAvatar } from 'react-icons/rx';
+import { toast } from 'react-toastify';
 
 const UserInfo = () => {
     const {data:userSession} = authClient.useSession();
     const user = userSession?.user
     const handleSignOut = async () => {
         await authClient.signOut();
+        toast.success("User logged out successfully !")
     }
 
     return (

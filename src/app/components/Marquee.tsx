@@ -1,10 +1,11 @@
-
+import bn from "number-to-bangla";
 import MarqueeText from "react-marquee-text";
 import "react-marquee-text/dist/styles.css";
 import {
   TbTriangleFilled,
   TbTriangleInvertedFilled,
 } from "react-icons/tb";
+import { translateUnit } from "./UnitConverter";
 
 interface Product {
   id: number | string;
@@ -70,7 +71,7 @@ const Marquee = async () => {
                   </span>
 
                   <span className="font-bold text-base-content">
-                    {product.today} টাকা/{product.unit}
+                    {bn.engToNumber(product.today)} টাকা/{translateUnit(product.unit)}
                   </span>
 
                   <span
@@ -84,7 +85,7 @@ const Marquee = async () => {
                     ) : (
                       <TbTriangleInvertedFilled aria-hidden="true" />
                     )}
-                    {Math.abs(product.change.pct)}%
+                    {bn.engToNumber(Math.abs(product.change.pct))}%
                   </span>
                 </div>
               );
