@@ -21,16 +21,18 @@ export default async function Home() {
 
   const products: IProductType[] = await res.json();
 
-  const priceIncreasedProducts = products.filter(
-    (product) => product.change.dir === "up"
-  );
+  const priceIncreasedProducts = products
+    .filter((product) => product.change.dir === "up")
+    .sort((a, b) => b.change.pct - a.change.pct)
+    .slice(0, 6);
 
-  const priceDecreasedProducts = products.filter(
-    (product) => product.change.dir === "down"
-  );
+  const priceDecreasedProducts = products
+    .filter((product) => product.change.dir === "down")
+    .sort((a, b) => a.change.pct - b.change.pct)
+    .slice(0, 6);
 
   return (
-    <div className="page-container flex flex-col gap-10 py-6 sm:py-8">
+    <div className="max-w-6xl mx-auto flex flex-col gap-10 py-6 sm:py-8">
       {/* Hero */}
       <section aria-label="বাজার দর পরিচিতি">
         <Hero />
