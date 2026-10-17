@@ -44,7 +44,7 @@ const Navbar = () => {
 
       {/* Category Navigation */}
       <nav aria-label="পণ্যের ক্যাটাগরি" className="border-t border-base-300 bg-base-200" >
-        <div className="page-container">
+        <div className="max-w-6xl mx-auto">
           <div className="overflow-x-auto">
             <NavLinks />
           </div>

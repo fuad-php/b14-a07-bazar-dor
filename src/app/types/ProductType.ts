@@ -15,12 +15,12 @@ change: {
     dir: "up" | "down";
     pct: number;
 },
-"markets": [
-    {
-    market: string;
-    division: string;
-    min: number;
-    max: number;
-    }
-]
+markets: [
+        {
+            market: string;
+            division: string;
+            min: number;
+            max: number;
+        }
+    ]
 }
