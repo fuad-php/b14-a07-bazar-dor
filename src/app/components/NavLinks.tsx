@@ -23,7 +23,7 @@ const NavLinks = async () => {
     });
 
     if (!res.ok) {
-      throw new Error("Failed to fetch categories.");
+      throw new Error(`Failed to fetch categories: ${res.status}`);
     }
 
     categories = await res.json();
@@ -37,20 +37,28 @@ const NavLinks = async () => {
 
   return (
     <div className="w-full">
-      <nav aria-label="পণ্যের ক্যাটাগরি" className="scrollbar-hide overflow-x-auto overscroll-x-contain">
-        <div className="flex w-max min-w-full items-center gap-1 py-2">
+      <div
+        aria-label="পণ্যের ক্যাটাগরি"
+        className="scrollbar-hide overflow-x-auto overscroll-x-contain"
+      >
+        <div className="mx-auto flex w-max min-w-full items-center gap-1 px-2 py-2 sm:gap-2 sm:px-5 lg:max-w-6xl lg:px-8">
           {categories.map((category) => (
-            <Link key={category.id} href={`/category/${category.slug}`} className="inline-flex shrink-0 items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-semibold text-base-content/75 transition-colors duration-200 hover:bg-primary/10 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" >
-              <span aria-hidden="true" className="text-base">
+            <Link
+              key={category.id}
+              href={`/category/${category.slug}`}
+              className="inline-flex shrink-0 items-center gap-1.5 rounded-lg px-3 py-2.5 text-sm font-medium text-base-content/75 transition-colors duration-200 hover:bg-primary/10 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary active:bg-primary/15 sm:gap-2 sm:px-4"
+            >
+              <span aria-hidden="true" className="text-base sm:text-lg">
                 {category.icon}
               </span>
+
               <span className="whitespace-nowrap">
                 {category.nameBn}
               </span>
             </Link>
           ))}
         </div>
-      </nav>
+      </div>
     </div>
   );
 };
