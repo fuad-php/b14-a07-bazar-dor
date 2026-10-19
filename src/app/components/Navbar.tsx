@@ -49,7 +49,7 @@ const Navbar = () => {
         aria-label="পণ্যের ক্যাটাগরি"
         className="border-t border-base-300 bg-base-200"
       >
-        <div className="mx-auto max-w-7xl">
+        <div className="mx-auto max-w-6xl">
           <div className="overflow-x-auto overscroll-x-contain">
             <NavLinks />
           </div>

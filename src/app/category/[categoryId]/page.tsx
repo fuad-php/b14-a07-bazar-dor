@@ -1,7 +1,8 @@
 
-import { notFound } from "next/navigation";
 import { IProductType } from "@/app/types/ProductType";
-import ProductCard from "@/app/components/ProductCard";
+import CategoryProducts, {
+  CategoryEmptyState,
+} from "@/app/components/CategoryProducts";
 
 interface ICategoryProps {
   params: Promise<{ categoryId: string }>;
@@ -33,8 +34,13 @@ const CategoryPage = async ({ params }: ICategoryProps) => {
     ),
   ]);
 
+  // Invalid category slug or ID
   if (categoryResponse.status === 404) {
-    notFound();
+    return (
+      <main className="max-w-6xl mx-auto py-12">
+        <CategoryEmptyState />
+      </main>
+    );
   }
 
   if (!categoryResponse.ok || !productsResponse.ok) {
@@ -45,7 +51,7 @@ const CategoryPage = async ({ params }: ICategoryProps) => {
   const products: IProductType[] = await productsResponse.json();
 
   return (
-    <main className="page-container py-8">
+    <main className="max-w-6xl mx-auto py-8">
       <section className="mb-8 rounded-2xl border border-base-300 bg-base-100 p-5 sm:p-8">
         <div className="flex items-center gap-4">
           <div className="flex size-16 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-4xl">
@@ -56,9 +62,11 @@ const CategoryPage = async ({ params }: ICategoryProps) => {
             <p className="text-sm font-medium text-primary">
               পণ্যের ক্যাটাগরি
             </p>
+
             <h1 className="text-2xl font-bold text-base-content sm:text-3xl">
               {category.nameBn}
             </h1>
+
             <p className="mt-1 text-sm text-base-content/60">
               {products.length}টি পণ্যের আজকের দাম ও পরিবর্তন
             </p>
@@ -66,25 +74,7 @@ const CategoryPage = async ({ params }: ICategoryProps) => {
         </div>
       </section>
 
-      <section>
-        <h2 className="section-title mb-5">
-          {category.nameBn} এর পণ্য
-        </h2>
-
-        {products.length > 0 ? (
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        ) : (
-          <div className="rounded-xl border border-base-300 bg-base-100 p-8 text-center">
-            <p className="font-semibold text-base-content">
-              এই ক্যাটাগরিতে কোনো পণ্য পাওয়া যায়নি।
-            </p>
-          </div>
-        )}
-      </section>
+      <CategoryProducts products={products} />
     </main>
   );
 };
