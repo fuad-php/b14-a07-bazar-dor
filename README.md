@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛒 Bazar Dor — Market Price Tracking App
 
-## Getting Started
+A modern, responsive market price tracking application built with **Next.js** that helps users monitor product prices across different markets.
 
-First, run the development server:
+## 📌 Short Description
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+**Bazar Dor** is Assignment 07 for Batch 14 of Programming Hero. The application provides a smooth and user-friendly experience for tracking market prices across different markets. Users can explore product prices, compare today's prices with yesterday's, check price increases and decreases, and review historical prices from the previous week.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Technologies Used
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Next.js** — React framework
+- **React** — User interface development
+- **TypeScript** — Type safety
+- **Tailwind CSS** — Styling and responsive design
+- **React Toastify** — Toast notifications
+- **Better Auth** — Authentication and social login
+- **MongoDB** — Database
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ✨ Key Features
 
-## Learn More
+1. **Responsive Design** — Optimized for desktop, tablet, and mobile devices.
+2. **Dynamic Data Fetching** — Fetches and displays market price data from an API.
+3. **Market Price Tracking** — Explore product prices across different markets.
+4. **Price Comparison** — Compare today's prices with yesterday's prices.
+5. **Price Trends** — Track price increases and decreases.
+6. **Weekly Price History** — Review product prices from the previous week.
+7. **Interactive Navigation** — Smooth navigation and state management.
+8. **Email and Password Authentication** — Secure user authentication with Better Auth.
+9. **Social Login** — Sign in using Google and GitHub.
+10. **Toast Notifications** — Get feedback for important user actions.
 
-To learn more about Next.js, take a look at the following resources:
+## 🎯 Project Goal
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The goal of Bazar Dor is to make market price information easier to access and understand, helping users compare prices and follow changes over time.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Developed as part of Programming Hero — Batch 14, Assignment 07.**
