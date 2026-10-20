@@ -1,4 +1,4 @@
-
+import { Suspense } from "react";
 import { IProductType } from "@/app/types/ProductType";
 import CategoryProducts, {
   CategoryEmptyState,
@@ -15,7 +15,39 @@ interface ICategoryType {
   icon: string;
 }
 
-const CategoryPage = async ({ params }: ICategoryProps) => {
+function CategorySkeleton() {
+  return (
+    <main className="max-w-6xl mx-auto py-8 animate-pulse">
+      <section className="mb-8 rounded-2xl border border-base-300 bg-base-100 p-5 sm:p-8">
+        <div className="flex items-center gap-4">
+          <div className="size-16 rounded-xl bg-base-300" />
+
+          <div className="flex-1 space-y-3">
+            <div className="h-4 w-28 rounded bg-base-300" />
+            <div className="h-8 w-48 rounded bg-base-300" />
+            <div className="h-4 w-64 max-w-full rounded bg-base-300" />
+          </div>
+        </div>
+      </section>
+
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+        {Array.from({ length: 8 }).map((_, index) => (
+          <div
+            key={index}
+            className="space-y-3 rounded-xl border border-base-300 p-4"
+          >
+            <div className="h-32 rounded-lg bg-base-300" />
+            <div className="h-5 w-3/4 rounded bg-base-300" />
+            <div className="h-4 w-1/2 rounded bg-base-300" />
+            <div className="h-8 rounded bg-base-300" />
+          </div>
+        ))}
+      </div>
+    </main>
+  );
+}
+
+async function CategoryContent({ params }: ICategoryProps) {
   const { categoryId } = await params;
   const apiUrl = process.env.PRODUCT_API_LINK;
 
@@ -34,7 +66,6 @@ const CategoryPage = async ({ params }: ICategoryProps) => {
     ),
   ]);
 
-  // Invalid category slug or ID
   if (categoryResponse.status === 404) {
     return (
       <main className="max-w-6xl mx-auto py-12">
@@ -77,6 +108,12 @@ const CategoryPage = async ({ params }: ICategoryProps) => {
       <CategoryProducts products={products} />
     </main>
   );
-};
+}
 
-export default CategoryPage;
+export default function CategoryPage({ params }: ICategoryProps) {
+  return (
+    <Suspense fallback={<CategorySkeleton />}>
+      <CategoryContent params={params} />
+    </Suspense>
+  );
+}
